@@ -10,6 +10,8 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApplication1 {
     public partial class BackUpForm : Form {
+        private long targetTime;
+
         public BackUpForm() {
             InitializeComponent();
         }
@@ -24,22 +26,34 @@ namespace WindowsFormsApplication1 {
             main_panel_RecoverData.Show();
         }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e) {
+        private void main_radioButton_daily_CheckedChanged(object sender, EventArgs e) {
             main_comboBox_monthly.Enabled = false;
             main_comboBox_weekly.Enabled = false;
             main_dateTimePicker_daily.Enabled = true;
+            var rb = (RadioButton)sender;
+            if (rb.Checked) {
+                refreshDaily();
+            }
         }
 
-        private void radioButton2_CheckedChanged(object sender, EventArgs e) {
+        private void main_radioButton_weekly_CheckedChanged(object sender, EventArgs e) {
             main_comboBox_weekly.Enabled = true;
             main_comboBox_monthly.Enabled = false;
             main_dateTimePicker_daily.Enabled = true;
+            var rb = (RadioButton)sender;
+            if (rb.Checked) {
+                refreshWeekly();
+            }
         }
 
         private void main_radioButton_monthly_CheckedChanged(object sender, EventArgs e) {
             main_comboBox_weekly.Enabled = false;
             main_comboBox_monthly.Enabled = true;
             main_dateTimePicker_daily.Enabled = true;
+            var rb = (RadioButton)sender;
+            if (rb.Checked) {
+                refreshMonthly();
+            }
         }
 
         private void main_radioButton_unused_CheckedChanged(object sender, EventArgs e) {
@@ -67,8 +81,29 @@ namespace WindowsFormsApplication1 {
             Environment.Exit(Environment.ExitCode);
         }
 
+        private void main_button_Save_Click(object sender, EventArgs e) {
+            this.Hide();
+            Icon.ShowBalloonTip(3000);
+        }
 
+        private void targetTimeRefresh() {
 
+        }
+
+        private void refreshMonthly() {
+
+        }
+
+        private void refreshWeekly() {
+
+        }
+
+        private void refreshDaily()
+        {
+            var hour = main_dateTimePicker_daily.Text.Substring(1,2);
+            var minute = main_dateTimePicker_daily.Text.Substring(3, 4);
+           
+        }
 
 
     }

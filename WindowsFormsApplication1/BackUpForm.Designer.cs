@@ -26,6 +26,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BackUpForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.main_button_Save = new System.Windows.Forms.Button();
             this.main_button_Exit = new System.Windows.Forms.Button();
             this.main_button_RecoverData = new System.Windows.Forms.Button();
             this.main_button_BackUpSetting = new System.Windows.Forms.Button();
@@ -58,6 +59,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.main_button_Save);
             this.splitContainer1.Panel1.Controls.Add(this.main_button_Exit);
             this.splitContainer1.Panel1.Controls.Add(this.main_button_RecoverData);
             this.splitContainer1.Panel1.Controls.Add(this.main_button_BackUpSetting);
@@ -70,6 +72,18 @@
             this.splitContainer1.SplitterDistance = 148;
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // main_button_Save
+            // 
+            this.main_button_Save.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.main_button_Save.Location = new System.Drawing.Point(20, 224);
+            this.main_button_Save.Margin = new System.Windows.Forms.Padding(2);
+            this.main_button_Save.Name = "main_button_Save";
+            this.main_button_Save.Size = new System.Drawing.Size(104, 44);
+            this.main_button_Save.TabIndex = 3;
+            this.main_button_Save.Text = "確定";
+            this.main_button_Save.UseVisualStyleBackColor = true;
+            this.main_button_Save.Click += new System.EventHandler(this.main_button_Save_Click);
             // 
             // main_button_Exit
             // 
@@ -86,7 +100,7 @@
             // main_button_RecoverData
             // 
             this.main_button_RecoverData.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.main_button_RecoverData.Location = new System.Drawing.Point(20, 164);
+            this.main_button_RecoverData.Location = new System.Drawing.Point(20, 98);
             this.main_button_RecoverData.Margin = new System.Windows.Forms.Padding(2);
             this.main_button_RecoverData.Name = "main_button_RecoverData";
             this.main_button_RecoverData.Size = new System.Drawing.Size(104, 44);
@@ -188,7 +202,7 @@
             // 
             // main_dateTimePicker_daily
             // 
-            this.main_dateTimePicker_daily.CustomFormat = " HH 點 mm 分";
+            this.main_dateTimePicker_daily.CustomFormat = " HH點mm 分 ";
             this.main_dateTimePicker_daily.Font = new System.Drawing.Font("新細明體", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.main_dateTimePicker_daily.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.main_dateTimePicker_daily.Location = new System.Drawing.Point(192, 25);
@@ -197,7 +211,7 @@
             this.main_dateTimePicker_daily.ShowUpDown = true;
             this.main_dateTimePicker_daily.Size = new System.Drawing.Size(109, 30);
             this.main_dateTimePicker_daily.TabIndex = 3;
-            this.main_dateTimePicker_daily.Value = new System.DateTime(2015, 8, 6, 0, 0, 0, 0);
+            this.main_dateTimePicker_daily.Value = new System.DateTime(2015, 7, 2, 0, 0, 0, 0);
             // 
             // main_radioButton_unused
             // 
@@ -239,7 +253,7 @@
             this.main_radioButton_weekly.TabStop = true;
             this.main_radioButton_weekly.Text = "每週";
             this.main_radioButton_weekly.UseVisualStyleBackColor = true;
-            this.main_radioButton_weekly.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            this.main_radioButton_weekly.CheckedChanged += new System.EventHandler(this.main_radioButton_weekly_CheckedChanged);
             // 
             // main_radioButton_daily
             // 
@@ -253,7 +267,7 @@
             this.main_radioButton_daily.TabStop = true;
             this.main_radioButton_daily.Text = "每日";
             this.main_radioButton_daily.UseVisualStyleBackColor = true;
-            this.main_radioButton_daily.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            this.main_radioButton_daily.CheckedChanged += new System.EventHandler(this.main_radioButton_daily_CheckedChanged);
             // 
             // main_panel_RecoverData
             // 
@@ -328,6 +342,7 @@
         private System.Windows.Forms.ContextMenuStrip IconStrip;
         private System.Windows.Forms.ToolStripMenuItem 結束ToolStripMenuItem;
         private System.Windows.Forms.Button main_button_Exit;
+        private System.Windows.Forms.Button main_button_Save;
     }
 }
 
