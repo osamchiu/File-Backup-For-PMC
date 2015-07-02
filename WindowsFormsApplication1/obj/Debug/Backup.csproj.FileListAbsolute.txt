@@ -10,3 +10,6 @@ D:\GitHub\File-Backup-For-PMC\WindowsFormsApplication1\WindowsFormsApplication1\
 D:\GitHub\File-Backup-For-PMC\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.BackUpForm.resources
 D:\GitHub\File-Backup-For-PMC\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
 D:\GitHub\File-Backup-For-PMC\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\Backup.csproj.GenerateResource.Cache
+D:\GitHub\File-Backup-For-PMC\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+D:\GitHub\File-Backup-For-PMC\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+D:\GitHub\File-Backup-For-PMC\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
