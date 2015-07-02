@@ -26,6 +26,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BackUpForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.main_button_Exit = new System.Windows.Forms.Button();
             this.main_button_RecoverData = new System.Windows.Forms.Button();
             this.main_button_BackUpSetting = new System.Windows.Forms.Button();
             this.main_panel_BackUpSetting = new System.Windows.Forms.Panel();
@@ -40,7 +41,6 @@
             this.Icon = new System.Windows.Forms.NotifyIcon(this.components);
             this.IconStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.結束ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.main_button_Exit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -70,6 +70,18 @@
             this.splitContainer1.SplitterDistance = 148;
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // main_button_Exit
+            // 
+            this.main_button_Exit.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.main_button_Exit.Location = new System.Drawing.Point(20, 303);
+            this.main_button_Exit.Margin = new System.Windows.Forms.Padding(2);
+            this.main_button_Exit.Name = "main_button_Exit";
+            this.main_button_Exit.Size = new System.Drawing.Size(104, 44);
+            this.main_button_Exit.TabIndex = 2;
+            this.main_button_Exit.Text = "關閉程式";
+            this.main_button_Exit.UseVisualStyleBackColor = true;
+            this.main_button_Exit.Click += new System.EventHandler(this.main_button_Exit_Click);
             // 
             // main_button_RecoverData
             // 
@@ -199,6 +211,7 @@
             this.main_radioButton_unused.TabStop = true;
             this.main_radioButton_unused.Text = "不使用";
             this.main_radioButton_unused.UseVisualStyleBackColor = true;
+            this.main_radioButton_unused.CheckedChanged += new System.EventHandler(this.main_radioButton_unused_CheckedChanged);
             // 
             // main_radioButton_monthly
             // 
@@ -212,7 +225,7 @@
             this.main_radioButton_monthly.TabStop = true;
             this.main_radioButton_monthly.Text = "每月";
             this.main_radioButton_monthly.UseVisualStyleBackColor = true;
-            this.main_radioButton_monthly.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
+            this.main_radioButton_monthly.CheckedChanged += new System.EventHandler(this.main_radioButton_monthly_CheckedChanged);
             // 
             // main_radioButton_weekly
             // 
@@ -275,18 +288,6 @@
             this.結束ToolStripMenuItem.Text = "結束程式";
             this.結束ToolStripMenuItem.Click += new System.EventHandler(this.結束ToolStripMenuItem_Click);
             // 
-            // main_button_Exit
-            // 
-            this.main_button_Exit.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.main_button_Exit.Location = new System.Drawing.Point(20, 303);
-            this.main_button_Exit.Margin = new System.Windows.Forms.Padding(2);
-            this.main_button_Exit.Name = "main_button_Exit";
-            this.main_button_Exit.Size = new System.Drawing.Size(104, 44);
-            this.main_button_Exit.TabIndex = 2;
-            this.main_button_Exit.Text = "關閉程式";
-            this.main_button_Exit.UseVisualStyleBackColor = true;
-            this.main_button_Exit.Click += new System.EventHandler(this.button1_Click_1);
-            // 
             // BackUpForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -298,7 +299,6 @@
             this.Name = "BackUpForm";
             this.Text = "BackUp";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.Load += new System.EventHandler(this.BackUpForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();

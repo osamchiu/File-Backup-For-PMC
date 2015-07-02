@@ -27,20 +27,28 @@ namespace WindowsFormsApplication1 {
         private void radioButton1_CheckedChanged(object sender, EventArgs e) {
             main_comboBox_monthly.Enabled = false;
             main_comboBox_weekly.Enabled = false;
+            main_dateTimePicker_daily.Enabled = true;
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e) {
             main_comboBox_weekly.Enabled = true;
             main_comboBox_monthly.Enabled = false;
+            main_dateTimePicker_daily.Enabled = true;
         }
 
-        private void radioButton3_CheckedChanged(object sender, EventArgs e) {
+        private void main_radioButton_monthly_CheckedChanged(object sender, EventArgs e) {
             main_comboBox_weekly.Enabled = false;
             main_comboBox_monthly.Enabled = true;
+            main_dateTimePicker_daily.Enabled = true;
         }
 
-        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
+        private void main_radioButton_unused_CheckedChanged(object sender, EventArgs e) {
+            main_comboBox_weekly.Enabled = false;
+            main_comboBox_monthly.Enabled = false;
+            main_dateTimePicker_daily.Enabled = false;
+        }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e) {
             this.Show();
             this.WindowState = FormWindowState.Normal;
         }
@@ -55,13 +63,13 @@ namespace WindowsFormsApplication1 {
             Environment.Exit(Environment.ExitCode);
         }
 
-        private void button1_Click_1(object sender, EventArgs e) {
+        private void main_button_Exit_Click(object sender, EventArgs e) {
             Environment.Exit(Environment.ExitCode);
         }
 
-        private void BackUpForm_Load(object sender, EventArgs e) {
 
-        }
+
+
 
     }
 }
