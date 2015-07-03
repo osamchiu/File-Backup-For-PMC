@@ -14,8 +14,9 @@ namespace WindowsFormsApplication1 {
     public partial class BackUpForm : Form {
         private DateTime nextTime;
         private long targetTime;
-
-        string fileName = "test.txt";
+        private int textboxcount = 0;
+        private int upcount = 0;
+        string fileName = "test";
         string sourcePath = @"C:\Data_BackUp";
         string targetPath = @"C:\Data_BackUp\target";
         string tablePath = @"C:\Data_BackUp\table";
@@ -30,10 +31,15 @@ namespace WindowsFormsApplication1 {
             main_panel_RecoverData.Hide();
 
             /***************************************************************/
-            //test copy
+            //test copy           
+            String temp = fileName;
+            String time = DateTime.Now.ToString("_yyyyMMdd_HHmmss") + ".txt";
+            Console.WriteLine(time);
+            
             string sourefile = Path.Combine(sourcePath, fileName);
-            string targetfile = Path.Combine(targetPath, fileName);
             string tablefile = Path.Combine(tablePath, fileName);
+            fileName += time;
+            string targetfile = Path.Combine(targetPath, fileName);
             
             if (!Directory.Exists(tablePath))
             {
@@ -58,13 +64,13 @@ namespace WindowsFormsApplication1 {
 
             try
             {
+                //targetfile += DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 File.Copy(sourefile, targetfile, true);
-                tableWriter.Write(DateTime.Now.ToString("yyyy/MM/dd (ddd) HH:mm:ss"));
-                tableWriter.Write(" ");
+                tableWriter.Write(DateTime.Now.ToString("yyyy/MM/dd (ddd) HH:mm:ss "));
                 tableWriter.WriteLine(fileName);
             }
             catch { }
-
+            fileName = temp;
             tableWriter.Close();
             listView1.Clear();
             /***************************************************************/
@@ -81,10 +87,7 @@ namespace WindowsFormsApplication1 {
             string tablefile = Path.Combine(tablePath, fileName);
             StreamReader tableReader = new StreamReader(tablefile);
 
-            listView1.Columns.Add("Date", 70, HorizontalAlignment.Center);
-            listView1.Columns.Add("Week", 50, HorizontalAlignment.Center);
-            listView1.Columns.Add("Time", 80, HorizontalAlignment.Center);
-            listView1.Columns.Add("File name", 282, HorizontalAlignment.Left);
+            InitialColumns();
             listView1.MultiSelect = false;
 
             while ((line = tableReader.ReadLine()) != null)
@@ -250,20 +253,29 @@ namespace WindowsFormsApplication1 {
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
-            foreach (ListViewItem tmpLstView in listView1.Items)
+            textboxcount =  textBox1.Text.Length;
+            if (textboxcount > upcount)//more
             {
-                String comper = tmpLstView.SubItems[0].Text + " "
-                                //+ tmpLstView.SubItems[1].Text + " "
-                                + tmpLstView.SubItems[2].Text + " "
-                                + tmpLstView.SubItems[3].Text;
-                if (comper.StartsWith(textBox1.Text) == false)
+                foreach (ListViewItem tmpLstView in listView1.Items)
                 {
-                    listView1.Items.Remove(tmpLstView);
+                    String comper = tmpLstView.SubItems[0].Text + " "
+                        //+ tmpLstView.SubItems[1].Text + " "
+                                      + tmpLstView.SubItems[2].Text + " "
+                                      + tmpLstView.SubItems[3].Text;
+                    if (comper.StartsWith(textBox1.Text) == false)
+                    {
+                        listView1.Items.Remove(tmpLstView);
+                    }
                 }
                 
+            }
+            else
+            {
+                listView1.Clear();
+                InitialColumns();
+
                 String line;
-                String[] get = new String[3];
+                String[] get = new String[4];
                 char[] separator = {' '};
                 string tablefile = Path.Combine(tablePath, fileName);
                 StreamReader tableReader = new StreamReader(tablefile);
@@ -271,21 +283,62 @@ namespace WindowsFormsApplication1 {
                 while ((line = tableReader.ReadLine()) != null)
                 {
                     get = line.Split(separator);
-                        
+
                     line = get[0] + " " + get[2] + " " + get[3];
-                    if (line.StartsWith(textBox1.Text) == true && listView1.Items.Contains(tmpLstView)==false)
+                    
+                    if (line.StartsWith(textBox1.Text) == true)
+                    {
+                        Console.WriteLine(line);
+                        newView(get);
+                    }
+                }
+                tableReader.Close();
+            }
+
+            upcount = textboxcount;
+            /*
+            Console.WriteLine( listView1.Items.Find(textBox1.Text,true));
+
+            ListViewItem foundItem = listView1.FindItemWithText(textBox1.Text, false, 0, true);
+            if (foundItem != null)
+            {
+                listView1.TopItem = foundItem;
+
+            }
+
+            
+            /* case 3  can del and recover//要再找辦法 太消耗
+            foreach (ListViewItem tmpLstView in listView1.Items)
+            {
+                String comper = tmpLstView.SubItems[0].Text + " "s
+                                //+ tmpLstView.SubItems[1].Text + " "
+                                + tmpLstView.SubItems[2].Text + " "
+                                + tmpLstView.SubItems[3].Text;
+                String line;
+                String[] get = new String[3];
+                char[] separator = { ' ' };
+                string tablefile = Path.Combine(tablePath, fileName);
+                StreamReader tableReader = new StreamReader(tablefile);
+
+                while ((line = tableReader.ReadLine()) != null)
+                {
+                    get = line.Split(separator);
+
+                    line = get[0] + " " + get[2] + " " + get[3];
+                    if (line.StartsWith(textBox1.Text) && tmpLstView.SubItems[3].Text.Equals(get[3]) == true)
                     {
                         newView(get);
                     }
                 }
                 tableReader.Close();
-                    
-                    
-                //listView1.Items.Add(tmpLstView);
-                
-                    
-                
+
+                if (comper.StartsWith(textBox1.Text) == false)
+                {
+                    listView1.Items.Remove(tmpLstView);
+                }
+                //listView1.Items.Add(tmpLstView); 
             }
+            */
         }
 
 
@@ -297,6 +350,14 @@ namespace WindowsFormsApplication1 {
             item.SubItems.Add(get[2]);
             item.SubItems.Add(get[3]);
             listView1.Items.Add(item);
+        }
+
+        private void InitialColumns()
+        {
+            listView1.Columns.Add("Date", 70, HorizontalAlignment.Center);
+            listView1.Columns.Add("Week", 50, HorizontalAlignment.Center);
+            listView1.Columns.Add("Time", 80, HorizontalAlignment.Center);
+            listView1.Columns.Add("File name", 282, HorizontalAlignment.Left);
         }
     }
 }
