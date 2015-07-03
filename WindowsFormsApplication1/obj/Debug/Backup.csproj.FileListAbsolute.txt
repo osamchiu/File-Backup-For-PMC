@@ -19,3 +19,12 @@ D:\GitHub\File-Backup-For-PMC\WindowsFormsApplication1\obj\Debug\Backup.csprojRe
 D:\GitHub\File-Backup-For-PMC\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.BackUpForm.resources
 D:\GitHub\File-Backup-For-PMC\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
 D:\GitHub\File-Backup-For-PMC\WindowsFormsApplication1\obj\Debug\Backup.csproj.GenerateResource.Cache
+C:\Users\賀\Desktop\File-Backup-For-PMC\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+C:\Users\賀\Desktop\File-Backup-For-PMC\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+C:\Users\賀\Desktop\File-Backup-For-PMC\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+C:\Users\賀\Desktop\File-Backup-For-PMC\WindowsFormsApplication1\obj\Debug\Backup.csprojResolveAssemblyReference.cache
+C:\Users\賀\Desktop\File-Backup-For-PMC\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.BackUpForm.resources
+C:\Users\賀\Desktop\File-Backup-For-PMC\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\賀\Desktop\File-Backup-For-PMC\WindowsFormsApplication1\obj\Debug\Backup.csproj.GenerateResource.Cache
+C:\Users\賀\Desktop\File-Backup-For-PMC\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+C:\Users\賀\Desktop\File-Backup-For-PMC\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
