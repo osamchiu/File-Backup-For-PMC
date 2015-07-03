@@ -134,7 +134,11 @@
             this.main_panel_BackUpSetting.Controls.Add(this.main_radioButton_monthly);
             this.main_panel_BackUpSetting.Controls.Add(this.main_radioButton_weekly);
             this.main_panel_BackUpSetting.Controls.Add(this.main_radioButton_daily);
+
+            this.main_panel_BackUpSetting.Location = new System.Drawing.Point(0, 0);
+
             this.main_panel_BackUpSetting.Location = new System.Drawing.Point(712, 116);
+
             this.main_panel_BackUpSetting.Margin = new System.Windows.Forms.Padding(2);
             this.main_panel_BackUpSetting.Name = "main_panel_BackUpSetting";
             this.main_panel_BackUpSetting.Size = new System.Drawing.Size(514, 378);
@@ -206,7 +210,7 @@
             // 
             // main_dateTimePicker_daily
             // 
-            this.main_dateTimePicker_daily.CustomFormat = " HH點mm 分 ";
+            this.main_dateTimePicker_daily.CustomFormat = " HH點 mm 分 ";
             this.main_dateTimePicker_daily.Font = new System.Drawing.Font("新細明體", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.main_dateTimePicker_daily.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.main_dateTimePicker_daily.Location = new System.Drawing.Point(192, 25);
@@ -275,10 +279,14 @@
             // 
             // main_panel_RecoverData
             // 
+
+            this.main_panel_RecoverData.Location = new System.Drawing.Point(0, 0);
+
             this.main_panel_RecoverData.Controls.Add(this.textBox1);
             this.main_panel_RecoverData.Controls.Add(this.button1);
             this.main_panel_RecoverData.Controls.Add(this.listView1);
             this.main_panel_RecoverData.Location = new System.Drawing.Point(-1, 0);
+
             this.main_panel_RecoverData.Margin = new System.Windows.Forms.Padding(2);
             this.main_panel_RecoverData.Name = "main_panel_RecoverData";
             this.main_panel_RecoverData.Size = new System.Drawing.Size(514, 378);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,12 +12,15 @@ using System.IO;
 
 namespace WindowsFormsApplication1 {
     public partial class BackUpForm : Form {
+        private DateTime nextTime;
         private long targetTime;
+
         string fileName = "test.txt";
-        string sourcePath = @"D:\Data_BackUp";
-        string targetPath = @"D:\Data_BackUp\target";
-        string tablePath = @"D:\Data_BackUp\table";
+        string sourcePath = @"C:\Data_BackUp";
+        string targetPath = @"C:\Data_BackUp\target";
+        string tablePath = @"C:\Data_BackUp\table";
         
+
         public BackUpForm() {
             InitializeComponent();
         }
@@ -96,30 +100,18 @@ namespace WindowsFormsApplication1 {
             main_comboBox_monthly.Enabled = false;
             main_comboBox_weekly.Enabled = false;
             main_dateTimePicker_daily.Enabled = true;
-            var rb = (RadioButton)sender;
-            if (rb.Checked) {
-                refreshDaily();
-            }
         }
 
         private void main_radioButton_weekly_CheckedChanged(object sender, EventArgs e) {
             main_comboBox_weekly.Enabled = true;
             main_comboBox_monthly.Enabled = false;
             main_dateTimePicker_daily.Enabled = true;
-            var rb = (RadioButton)sender;
-            if (rb.Checked) {
-                refreshWeekly();
-            }
         }
 
         private void main_radioButton_monthly_CheckedChanged(object sender, EventArgs e) {
             main_comboBox_weekly.Enabled = false;
             main_comboBox_monthly.Enabled = true;
             main_dateTimePicker_daily.Enabled = true;
-            var rb = (RadioButton)sender;
-            if (rb.Checked) {
-                refreshMonthly();
-            }
         }
 
         private void main_radioButton_unused_CheckedChanged(object sender, EventArgs e) {
@@ -148,31 +140,92 @@ namespace WindowsFormsApplication1 {
         }
 
         private void main_button_Save_Click(object sender, EventArgs e) {
-            this.Hide();
-            Icon.ShowBalloonTip(3000);
+            if (main_radioButton_daily.Checked) {
+                targetTime = refreshDaily();
+            } else if (main_radioButton_weekly.Checked) {
+                targetTime = refreshWeekly();
+            } else if (main_radioButton_monthly.Checked) {
+                targetTime = refreshMonthly();
+            }
+
+
+
+            //this.Hide();
+            //Icon.ShowBalloonTip(3000);
         }
 
-        private void targetTimeRefresh() {
+        private long refreshMonthly() {
+            string hour = main_dateTimePicker_daily.Text.Substring(1, 2);
+            string minute = main_dateTimePicker_daily.Text.Substring(4, 4);
+            int hourInt = Convert.ToInt32(hour);
+            int minuteInt = Convert.ToInt32(minute);
 
+            DateTime nextTempTime = DateTime.Now.AddMonths(1);
+            string nextTimeFormat = nextTempTime.Year.ToString() + " " + nextTempTime.Month.ToString() + " " + main_comboBox_monthly.Text;
+            nextTime = DateTime.ParseExact(nextTimeFormat, "yyyy M d", CultureInfo.InvariantCulture);
+            TimeSpan nextTimeSpan = nextTime - DateTime.Now;
+            return (long)nextTimeSpan.TotalSeconds + deSecond(hourInt, minuteInt, 0, 0);
         }
 
-        private void refreshMonthly() {
+        private long refreshWeekly() {
+            DayOfWeek weekDay = DateTime.Now.DayOfWeek;
+            DateTime targetWeekDay;
 
+            if (main_comboBox_weekly.Text.Equals("一")) {
+                weekDay = DayOfWeek.Monday;
+            } else if (main_comboBox_weekly.Text.Equals("二")) {
+                weekDay = DayOfWeek.Tuesday;
+            } else if (main_comboBox_weekly.Text.Equals("三")) {
+                weekDay = DayOfWeek.Wednesday;
+            } else if (main_comboBox_weekly.Text.Equals("四")) {
+                weekDay = DayOfWeek.Tuesday;
+            } else if (main_comboBox_weekly.Text.Equals("五")) {
+                weekDay = DayOfWeek.Friday;
+            } else if (main_comboBox_weekly.Text.Equals("六")) {
+                weekDay = DayOfWeek.Saturday;
+            } else if (main_comboBox_weekly.Text.Equals("日")) {
+                weekDay = DayOfWeek.Sunday;
+            }
+
+            if (weekDay > DateTime.Now.DayOfWeek) {
+                targetWeekDay = getWeekUpOfDate(DateTime.Now, weekDay, 0);
+            } else {
+                targetWeekDay = getWeekUpOfDate(DateTime.Now, weekDay, 1);
+            }
+
+            string hour = main_dateTimePicker_daily.Text.Substring(1, 2);
+            string minute = main_dateTimePicker_daily.Text.Substring(4, 4);
+            int hourInt = Convert.ToInt32(hour);
+            int minuteInt = Convert.ToInt32(minute);
+
+            TimeSpan nextTimeSpan = targetWeekDay - DateTime.Now;
+            MessageBox.Show(Convert.ToString((long)nextTimeSpan.TotalSeconds + deSecond(hourInt, minuteInt, Convert.ToInt32(DateTime.Now.Hour), Convert.ToInt32(DateTime.Now.Minute))));
+            return (long)nextTimeSpan.TotalSeconds + deSecond(hourInt, minuteInt, 0, 0);
         }
 
-        private void refreshWeekly() {
+        private long refreshDaily() {
+            string hour = main_dateTimePicker_daily.Text.Substring(1, 2);
+            string minute = main_dateTimePicker_daily.Text.Substring(4, 4);
 
+            int hourInt = Convert.ToInt32(hour);
+            int minuteInt = Convert.ToInt32(minute);
+            return deSecond(hourInt, minuteInt, Convert.ToInt32(DateTime.Now.Hour), Convert.ToInt32(DateTime.Now.Minute));
         }
 
-        private void refreshDaily()
-        {
-            var hour = main_dateTimePicker_daily.Text.Substring(1,2);
-            var minute = main_dateTimePicker_daily.Text.Substring(3, 4);
-           
+        private long deSecond(int hourInt, int minuteInt, int nowHour, int nowMinute) {
+            long targetSecond = Math.Abs(((hourInt * 60 + minuteInt) - (nowHour * 60 + nowMinute))) * 60;
+            return targetSecond;
+        }
+
+        private DateTime getWeekUpOfDate(DateTime dt, DayOfWeek weekday, int Number) {
+            int wd1 = (int)weekday;
+            int wd2 = (int)dt.DayOfWeek;
+            return wd2 == wd1 ? dt.AddDays(7 * Number) : dt.AddDays(7 * Number - wd2 + wd1);
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
+
 
         }
 
