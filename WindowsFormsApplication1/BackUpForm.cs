@@ -59,7 +59,7 @@ namespace WindowsFormsApplication1 {
             try
             {
                 File.Copy(sourefile, targetfile, true);
-                tableWriter.Write(DateTime.Now.ToString("yyyy/MM/dd ddd HH:mm:ss"));
+                tableWriter.Write(DateTime.Now.ToString("yyyy/MM/dd (ddd) HH:mm:ss"));
                 tableWriter.Write(" ");
                 tableWriter.WriteLine(fileName);
             }
@@ -81,10 +81,10 @@ namespace WindowsFormsApplication1 {
             string tablefile = Path.Combine(tablePath, fileName);
             StreamReader tableReader = new StreamReader(tablefile);
 
-            listView1.Columns.Add("Date", 80, HorizontalAlignment.Center);
-            listView1.Columns.Add("Week", 60, HorizontalAlignment.Center);
+            listView1.Columns.Add("Date", 70, HorizontalAlignment.Center);
+            listView1.Columns.Add("Week", 50, HorizontalAlignment.Center);
             listView1.Columns.Add("Time", 80, HorizontalAlignment.Center);
-            listView1.Columns.Add("File name", 260, HorizontalAlignment.Left);
+            listView1.Columns.Add("File name", 282, HorizontalAlignment.Left);
             listView1.MultiSelect = false;
 
             while ((line = tableReader.ReadLine()) != null)
@@ -238,8 +238,8 @@ namespace WindowsFormsApplication1 {
             {
                 if (tmpLstView.Selected == true)
                 {
-                    textBox1.Text = tmpLstView.SubItems[0].Text + " " 
-                                  + tmpLstView.SubItems[1].Text + " " 
+                    textBox1.Text = tmpLstView.SubItems[0].Text + " "
+                                  + tmpLstView.SubItems[1].Text + " "
                                   + tmpLstView.SubItems[2].Text + " "
                                   + tmpLstView.SubItems[3].Text;
                 }
@@ -251,6 +251,41 @@ namespace WindowsFormsApplication1 {
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+            foreach (ListViewItem tmpLstView in listView1.Items)
+            {
+                String comper = tmpLstView.SubItems[0].Text + " "
+                                //+ tmpLstView.SubItems[1].Text + " "
+                                + tmpLstView.SubItems[2].Text + " "
+                                + tmpLstView.SubItems[3].Text;
+                if (comper.StartsWith(textBox1.Text) == false)
+                {
+                    listView1.Items.Remove(tmpLstView);
+                }
+                
+                String line;
+                String[] get = new String[3];
+                char[] separator = {' '};
+                string tablefile = Path.Combine(tablePath, fileName);
+                StreamReader tableReader = new StreamReader(tablefile);
+
+                while ((line = tableReader.ReadLine()) != null)
+                {
+                    get = line.Split(separator);
+                        
+                    line = get[0] + " " + get[2] + " " + get[3];
+                    if (line.StartsWith(textBox1.Text) == true && listView1.Items.Contains(tmpLstView)==false)
+                    {
+                        newView(get);
+                    }
+                }
+                tableReader.Close();
+                    
+                    
+                //listView1.Items.Add(tmpLstView);
+                
+                    
+                
+            }
         }
 
 
