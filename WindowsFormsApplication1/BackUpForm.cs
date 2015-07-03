@@ -19,7 +19,6 @@ namespace WindowsFormsApplication1 {
         string sourcePath = @"C:\Data_BackUp";
         string targetPath = @"C:\Data_BackUp\target";
         string tablePath = @"C:\Data_BackUp\table";
-        
 
         public BackUpForm() {
             InitializeComponent();
@@ -34,36 +33,29 @@ namespace WindowsFormsApplication1 {
             string sourefile = Path.Combine(sourcePath, fileName);
             string targetfile = Path.Combine(targetPath, fileName);
             string tablefile = Path.Combine(tablePath, fileName);
-            
-            if (!Directory.Exists(tablePath))
-            {
+
+            if (!Directory.Exists(tablePath)) {
                 Directory.CreateDirectory(tablePath);
             }
 
             StreamWriter tableWriter = new StreamWriter(tablefile, true);
 
-            if (!Directory.Exists(sourcePath))
-            {
+            if (!Directory.Exists(sourcePath)) {
                 Console.WriteLine("sourcePath dosen't exist!");
             }
 
-            if (!Directory.Exists(targetPath))
-            {
-                try
-                {
+            if (!Directory.Exists(targetPath)) {
+                try {
                     Directory.CreateDirectory(targetPath);
-                }
-                catch { }
+                } catch { }
             }
 
-            try
-            {
+            try {
                 File.Copy(sourefile, targetfile, true);
                 tableWriter.Write(DateTime.Now.ToString("yyyy/MM/dd ddd HH:mm:ss"));
                 tableWriter.Write(" ");
                 tableWriter.WriteLine(fileName);
-            }
-            catch { }
+            } catch { }
 
             tableWriter.Close();
             listView1.Clear();
@@ -77,7 +69,7 @@ namespace WindowsFormsApplication1 {
             String line;
             String[] get = new String[4];
             char[] separator = { ' ' };
-                
+
             string tablefile = Path.Combine(tablePath, fileName);
             StreamReader tableReader = new StreamReader(tablefile);
 
@@ -87,8 +79,7 @@ namespace WindowsFormsApplication1 {
             listView1.Columns.Add("File name", 260, HorizontalAlignment.Left);
             listView1.MultiSelect = false;
 
-            while ((line = tableReader.ReadLine()) != null)
-            {
+            while ((line = tableReader.ReadLine()) != null) {
                 get = line.Split(separator);
                 newView(get);
             }
@@ -100,24 +91,28 @@ namespace WindowsFormsApplication1 {
             main_comboBox_monthly.Enabled = false;
             main_comboBox_weekly.Enabled = false;
             main_dateTimePicker_daily.Enabled = true;
+
         }
 
         private void main_radioButton_weekly_CheckedChanged(object sender, EventArgs e) {
             main_comboBox_weekly.Enabled = true;
             main_comboBox_monthly.Enabled = false;
             main_dateTimePicker_daily.Enabled = true;
+
         }
 
         private void main_radioButton_monthly_CheckedChanged(object sender, EventArgs e) {
             main_comboBox_weekly.Enabled = false;
             main_comboBox_monthly.Enabled = true;
             main_dateTimePicker_daily.Enabled = true;
+
         }
 
         private void main_radioButton_unused_CheckedChanged(object sender, EventArgs e) {
             main_comboBox_weekly.Enabled = false;
             main_comboBox_monthly.Enabled = false;
             main_dateTimePicker_daily.Enabled = false;
+
         }
 
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e) {
@@ -149,6 +144,17 @@ namespace WindowsFormsApplication1 {
             }
 
 
+            timer.Enabled = true;
+
+            if (main_radioButton_unused.Checked) {
+                timer.Enabled = false;
+            }
+
+            timer.Interval = (int)targetTime * 1000;
+
+            //備份
+
+            //備份
 
             //this.Hide();
             //Icon.ShowBalloonTip(3000);
@@ -187,7 +193,7 @@ namespace WindowsFormsApplication1 {
                 weekDay = DayOfWeek.Sunday;
             }
 
-            if (weekDay > DateTime.Now.DayOfWeek) {
+            if (weekDay >= DateTime.Now.DayOfWeek) {
                 targetWeekDay = getWeekUpOfDate(DateTime.Now, weekDay, 0);
             } else {
                 targetWeekDay = getWeekUpOfDate(DateTime.Now, weekDay, 1);
@@ -200,7 +206,9 @@ namespace WindowsFormsApplication1 {
 
             TimeSpan nextTimeSpan = targetWeekDay - DateTime.Now;
             MessageBox.Show(Convert.ToString((long)nextTimeSpan.TotalSeconds + deSecond(hourInt, minuteInt, Convert.ToInt32(DateTime.Now.Hour), Convert.ToInt32(DateTime.Now.Minute))));
-            return (long)nextTimeSpan.TotalSeconds + deSecond(hourInt, minuteInt, 0, 0);
+
+
+            return (long)nextTimeSpan.TotalSeconds + deSecond(hourInt, minuteInt, Convert.ToInt32(DateTime.Now.Hour), Convert.ToInt32(DateTime.Now.Minute));
         }
 
         private long refreshDaily() {
@@ -223,45 +231,62 @@ namespace WindowsFormsApplication1 {
             return wd2 == wd1 ? dt.AddDays(7 * Number) : dt.AddDays(7 * Number - wd2 + wd1);
         }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e) {
 
 
         }
 
-        private void button1_Click_return(object sender, EventArgs e)
-        {
+        private void button1_Click_return(object sender, EventArgs e) {
 
             /***************************************************************/
             //get data test
-            foreach (ListViewItem tmpLstView in listView1.Items)
-            {
-                if (tmpLstView.Selected == true)
-                {
-                    textBox1.Text = tmpLstView.SubItems[0].Text + " " 
-                                  + tmpLstView.SubItems[1].Text + " " 
+            foreach (ListViewItem tmpLstView in listView1.Items) {
+                if (tmpLstView.Selected == true) {
+                    textBox1.Text = tmpLstView.SubItems[0].Text + " "
+                                  + tmpLstView.SubItems[1].Text + " "
                                   + tmpLstView.SubItems[2].Text + " "
                                   + tmpLstView.SubItems[3].Text;
                 }
             }
             /***************************************************************/
-            
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
 
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e) {
 
-        private void newView(String[] get)
-        {
+        }
+
+
+        private void newView(String[] get) {
             ListViewItem item = new ListViewItem();
             item.Text = (get[0]);
             item.SubItems.Add(get[1]);
             item.SubItems.Add(get[2]);
             item.SubItems.Add(get[3]);
             listView1.Items.Add(item);
+        }
+
+        private void timer_Tick(object sender, EventArgs e) {
+            //備份
+
+            //備份
+
+            Icon.BalloonTipText = "備份完成";
+            Icon.ShowBalloonTip(3000);
+
+
+            if (main_radioButton_daily.Checked) {
+                targetTime = refreshDaily();
+            } else if (main_radioButton_weekly.Checked) {
+                targetTime = refreshWeekly();
+                targetTime = 604800;
+            } else if (main_radioButton_monthly.Checked) {
+                targetTime = refreshMonthly();
+                targetTime = 86400 * DateTime.Now.Day;
+            }
+
+            timer.Interval = (int)targetTime * 1000;
+
         }
     }
 }

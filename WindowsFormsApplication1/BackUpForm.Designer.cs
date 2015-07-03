@@ -39,12 +39,13 @@
             this.main_radioButton_weekly = new System.Windows.Forms.RadioButton();
             this.main_radioButton_daily = new System.Windows.Forms.RadioButton();
             this.main_panel_RecoverData = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.Icon = new System.Windows.Forms.NotifyIcon(this.components);
             this.IconStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.結束ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -134,11 +135,7 @@
             this.main_panel_BackUpSetting.Controls.Add(this.main_radioButton_monthly);
             this.main_panel_BackUpSetting.Controls.Add(this.main_radioButton_weekly);
             this.main_panel_BackUpSetting.Controls.Add(this.main_radioButton_daily);
-
-            this.main_panel_BackUpSetting.Location = new System.Drawing.Point(0, 0);
-
             this.main_panel_BackUpSetting.Location = new System.Drawing.Point(712, 116);
-
             this.main_panel_BackUpSetting.Margin = new System.Windows.Forms.Padding(2);
             this.main_panel_BackUpSetting.Name = "main_panel_BackUpSetting";
             this.main_panel_BackUpSetting.Size = new System.Drawing.Size(514, 378);
@@ -279,18 +276,22 @@
             // 
             // main_panel_RecoverData
             // 
-
-            this.main_panel_RecoverData.Location = new System.Drawing.Point(0, 0);
-
             this.main_panel_RecoverData.Controls.Add(this.textBox1);
             this.main_panel_RecoverData.Controls.Add(this.button1);
             this.main_panel_RecoverData.Controls.Add(this.listView1);
             this.main_panel_RecoverData.Location = new System.Drawing.Point(-1, 0);
-
             this.main_panel_RecoverData.Margin = new System.Windows.Forms.Padding(2);
             this.main_panel_RecoverData.Name = "main_panel_RecoverData";
             this.main_panel_RecoverData.Size = new System.Drawing.Size(514, 378);
             this.main_panel_RecoverData.TabIndex = 1;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(13, 22);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(388, 22);
+            this.textBox1.TabIndex = 2;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // button1
             // 
@@ -338,13 +339,9 @@
             this.結束ToolStripMenuItem.Text = "結束程式";
             this.結束ToolStripMenuItem.Click += new System.EventHandler(this.結束ToolStripMenuItem_Click);
             // 
-            // textBox1
+            // timer
             // 
-            this.textBox1.Location = new System.Drawing.Point(13, 22);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(388, 22);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // BackUpForm
             // 
@@ -392,6 +389,7 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Timer timer;
     }
 }
 
