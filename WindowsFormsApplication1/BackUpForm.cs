@@ -12,18 +12,15 @@ using System.IO;
 
 namespace WindowsFormsApplication1 {
     public partial class BackUpForm : Form {
-<<<<<<< HEAD
-        internal long targetTime = -1;
         private DateTime nextTime;
-
-=======
         private long targetTime;
+
         string fileName = "test.txt";
-        string sourcePath = @"D:\Data_BackUp";
-        string targetPath = @"D:\Data_BackUp\target";
-        string tablePath = @"D:\Data_BackUp\table";
+        string sourcePath = @"C:\Data_BackUp";
+        string targetPath = @"C:\Data_BackUp\target";
+        string tablePath = @"C:\Data_BackUp\table";
         
->>>>>>> origin/master
+
         public BackUpForm() {
             InitializeComponent();
         }
@@ -220,16 +217,15 @@ namespace WindowsFormsApplication1 {
             return targetSecond;
         }
 
-<<<<<<< HEAD
         private DateTime getWeekUpOfDate(DateTime dt, DayOfWeek weekday, int Number) {
             int wd1 = (int)weekday;
             int wd2 = (int)dt.DayOfWeek;
             return wd2 == wd1 ? dt.AddDays(7 * Number) : dt.AddDays(7 * Number - wd2 + wd1);
         }
-=======
+
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
->>>>>>> origin/master
+
 
         }
 

@@ -134,11 +134,11 @@
             this.main_panel_BackUpSetting.Controls.Add(this.main_radioButton_monthly);
             this.main_panel_BackUpSetting.Controls.Add(this.main_radioButton_weekly);
             this.main_panel_BackUpSetting.Controls.Add(this.main_radioButton_daily);
-<<<<<<< HEAD
+
             this.main_panel_BackUpSetting.Location = new System.Drawing.Point(0, 0);
-=======
+
             this.main_panel_BackUpSetting.Location = new System.Drawing.Point(712, 116);
->>>>>>> origin/master
+
             this.main_panel_BackUpSetting.Margin = new System.Windows.Forms.Padding(2);
             this.main_panel_BackUpSetting.Name = "main_panel_BackUpSetting";
             this.main_panel_BackUpSetting.Size = new System.Drawing.Size(514, 378);
@@ -279,14 +279,14 @@
             // 
             // main_panel_RecoverData
             // 
-<<<<<<< HEAD
+
             this.main_panel_RecoverData.Location = new System.Drawing.Point(0, 0);
-=======
+
             this.main_panel_RecoverData.Controls.Add(this.textBox1);
             this.main_panel_RecoverData.Controls.Add(this.button1);
             this.main_panel_RecoverData.Controls.Add(this.listView1);
             this.main_panel_RecoverData.Location = new System.Drawing.Point(-1, 0);
->>>>>>> origin/master
+
             this.main_panel_RecoverData.Margin = new System.Windows.Forms.Padding(2);
             this.main_panel_RecoverData.Name = "main_panel_RecoverData";
             this.main_panel_RecoverData.Size = new System.Drawing.Size(514, 378);
